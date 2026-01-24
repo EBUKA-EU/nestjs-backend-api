@@ -1,78 +1,98 @@
-<img width="150px" src="https://w0244079.github.io/nscc/nscc-jpeg.jpg" >
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-# PROG 5016 - RestAPI Creation Assignment
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-## Overview
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-In this assignment, you will expand your skills by building a new backend for your Single Page Application (SPA) using a framework or library other than Express.js. To explore your options for many of the requirements, you can visit the [annual State of JavaScript survey site](https://2024.stateofjs.com/en-US/) which highlights popular frameworks, libraries, and tools along with usage trends over the past year. This is an opportunity to explore different tools and approaches while adhering to the core principles of backend development.
+## Description
 
-## Objectives
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-- Build a RESTful API using a backend framework other than Express.js.
-- Implement CRUD operations for your SPA’s database which you have already created in an earlier assignment.
-- Use MongoDB as the database backend. (You created this from a previous assignment)
-- Ensure your API adheres to RESTful design principles.
+## Project setup
 
-## Requirements
+```bash
+$ pnpm install
+```
 
-### Backend Framework
+## Compile and run the project
 
-Select a backend framework or library other than Express.js. Examples include (but are not limited to):
+```bash
+# development
+$ pnpm run start
 
-- Node.js-based frameworks such as Koa, Hapi, NestJS, Fastify, or Sails.js
-- Frameworks or libraries that run on Bun, Deno, or Cloudflare Workers
-- Serverless solutions such as AWS Lambda, Azure Functions, or Vercel
-- A non-JS framework (be sure to get approval from your instructor if you choose this)
+# watch mode
+$ pnpm run start:dev
 
-IMPORTANT - Once you think you have narrowed down your choices, run them by your instructor either verbally, via email or via DM on Teams to ensure that your choices are acceptable for the requirements.
+# production mode
+$ pnpm run start:prod
+```
 
-### CRUD Endpoints
+## Run tests
 
-Create endpoints to handle Create, Read, Update, and Delete operations for your SPA’s core data model.
+```bash
+# unit tests
+$ pnpm run test
 
-The endpoints must:
+# e2e tests
+$ pnpm run test:e2e
 
-- Accept and validate incoming data. How your data validates is up to you but should make sense given the nature of your data. This includes:
-  - Checking for required fields and ensuring they are not empty.
-  - Validating data types (e.g., ensuring a field expected to be a number is not a string).
-  - Using validation libraries or built-in tools provided by your chosen framework (e.g., Joi for Hapi, decorators in NestJS, or custom middleware).
-  - Implementing custom validation rules for fields with specific constraints (e.g., checking email formats or ensuring a value falls within a certain range).
-  - Returning meaningful error messages when validation fails.
-  - Don't overdo the validation portions...keep it simple to start for this phase.
+# test coverage
+$ pnpm run test:cov
+```
 
-- Interact with the MongoDB database.
-- Return appropriate HTTP status codes and JSON responses.
+## Deployment
 
-### Database
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
-Use MongoDB, as created in the first assignment, as the database that you will connect to with this application.
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
-Ensure the database is properly structured to support your application’s data needs.
+```bash
+$ pnpm install -g @nestjs/mau
+$ mau deploy
+```
 
-## Deliverables
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-### Code Repository
+## Resources
 
-- Push your code to the provided GitHub repository as you progress with the requirements.
+Check out a few resources that may come in handy when working with NestJS:
 
-## Grading Criteria
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-Your submission will be graded according to an accompanying rubric on Brightspace.
+## Support
 
-### Functionality Checklist...
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-- All required CRUD endpoints are implemented and functional.
-- The API correctly interacts with the MongoDB database.
+## Stay in touch
 
-### Code Quality Checklist...
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-- Code is clean and readable.
-- Proper error handling is implemented.
+## License
 
-## Additional Notes
-
-- Feel free to experiment and explore different frameworks, but ensure your API meets the functional requirements.
-- Use online resources, documentation, and community forums to learn about your chosen framework.
-
-Good luck, and have fun exploring new backend technologies!
-
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
