@@ -25,6 +25,20 @@ let InterpretersService = class InterpretersService {
     async findAll() {
         return this.interpreterModel.find().exec();
     }
+    async findOne(id) {
+        if (!(0, mongoose_2.isValidObjectId)(id)) {
+            throw new common_1.BadRequestException('Invalid interpreter id');
+        }
+        const interpreter = await this.interpreterModel.findOne({ _id: id });
+        if (!interpreter) {
+            throw new common_1.NotFoundException('Interpreter not found');
+        }
+        return interpreter;
+    }
+    async createInterpreter(createInterpreterDto) {
+        const newInterpreter = new this.interpreterModel(createInterpreterDto);
+        return newInterpreter.save();
+    }
 };
 exports.InterpretersService = InterpretersService;
 exports.InterpretersService = InterpretersService = __decorate([

@@ -111,8 +111,8 @@ __decorate([
     __metadata("design:type", String)
 ], Call.prototype, "call_id", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
+    (0, mongoose_1.Prop)({ default: Date.now }),
+    __metadata("design:type", Date)
 ], Call.prototype, "call_date", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
@@ -192,8 +192,8 @@ __decorate([
     __metadata("design:type", Array)
 ], Interpreter.prototype, "languages", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
+    (0, mongoose_1.Prop)({ default: Date.now }),
+    __metadata("design:type", Date)
 ], Interpreter.prototype, "date_joined", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ type: exports.AddressSchema }),
@@ -216,7 +216,7 @@ __decorate([
     __metadata("design:type", Array)
 ], Interpreter.prototype, "calls", void 0);
 exports.Interpreter = Interpreter = __decorate([
-    (0, mongoose_1.Schema)({ _id: false })
+    (0, mongoose_1.Schema)()
 ], Interpreter);
 exports.InterpreterSchema = mongoose_1.SchemaFactory.createForClass(Interpreter);
 //# sourceMappingURL=interpreter.schema.js.map

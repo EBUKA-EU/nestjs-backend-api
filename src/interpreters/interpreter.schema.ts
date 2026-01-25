@@ -36,7 +36,7 @@ export const PerformanceSchema = SchemaFactory.createForClass(Performance);
 @Schema({_id: false})
 export class Call {
   @Prop() call_id: string;
-  @Prop() call_date: string;
+  @Prop({default: Date.now}) call_date: Date;
   @Prop() client_id: string;
   @Prop() start_time: string;
   @Prop() mins: number;
@@ -52,7 +52,7 @@ export class Call {
 
 export const CallSchema = SchemaFactory.createForClass(Call);
 
-@Schema({_id: false})
+@Schema()
 export class Interpreter extends Document {
   @Prop() interpreter_id: string;
   @Prop() name: string;
@@ -60,8 +60,8 @@ export class Interpreter extends Document {
 
   @Prop({ type: [LanguageSchema] })
   languages: Language[];
-
-  @Prop() date_joined: string;
+ 
+  @Prop({default: Date.now}) date_joined: Date;
 
   @Prop({ type: AddressSchema })
   address: Address;

@@ -189,7 +189,7 @@ export declare const PerformanceSchema: import("mongoose").Schema<Performance, i
 }, Performance>;
 export declare class Call {
     call_id: string;
-    call_date: string;
+    call_date: Date;
     client_id: string;
     start_time: string;
     mins: number;
@@ -230,7 +230,7 @@ export declare const CallSchema: import("mongoose").Schema<Call, import("mongoos
     }, "id"> & {
         id: string;
     }> | undefined;
-    call_date?: import("mongoose").SchemaDefinitionProperty<string, Call, Document<unknown, {}, Call, {
+    call_date?: import("mongoose").SchemaDefinitionProperty<Date, Call, Document<unknown, {}, Call, {
         id: string;
     }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<Call & {
         _id: import("mongoose").Types.ObjectId;
@@ -344,7 +344,7 @@ export declare class Interpreter extends Document {
     name: string;
     is_active: boolean;
     languages: Language[];
-    date_joined: string;
+    date_joined: Date;
     address: Address;
     type: string;
     badges: Badge[];
@@ -424,7 +424,7 @@ export declare const InterpreterSchema: import("mongoose").Schema<Interpreter, i
     }, "id"> & {
         id: string;
     }> | undefined;
-    date_joined?: import("mongoose").SchemaDefinitionProperty<string, Interpreter, Document<unknown, {}, Interpreter, {
+    date_joined?: import("mongoose").SchemaDefinitionProperty<Date, Interpreter, Document<unknown, {}, Interpreter, {
         id: string;
     }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<Interpreter & Required<{
         _id: import("mongoose").Types.ObjectId;
