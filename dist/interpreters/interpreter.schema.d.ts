@@ -388,7 +388,7 @@ export declare const InterpreterSchema: import("mongoose").Schema<Interpreter, i
     }, "id"> & {
         id: string;
     }> | undefined;
-    interpreter_id?: import("mongoose").SchemaDefinitionProperty<string, Interpreter, Document<unknown, {}, Interpreter, {
+    name?: import("mongoose").SchemaDefinitionProperty<string, Interpreter, Document<unknown, {}, Interpreter, {
         id: string;
     }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<Interpreter & Required<{
         _id: import("mongoose").Types.ObjectId;
@@ -397,7 +397,7 @@ export declare const InterpreterSchema: import("mongoose").Schema<Interpreter, i
     }, "id"> & {
         id: string;
     }> | undefined;
-    name?: import("mongoose").SchemaDefinitionProperty<string, Interpreter, Document<unknown, {}, Interpreter, {
+    interpreter_id?: import("mongoose").SchemaDefinitionProperty<string, Interpreter, Document<unknown, {}, Interpreter, {
         id: string;
     }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<Interpreter & Required<{
         _id: import("mongoose").Types.ObjectId;

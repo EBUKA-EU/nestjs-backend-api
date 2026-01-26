@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const interpreter_schema_1 = require("./interpreter.schema");
+const crypto_1 = require("crypto");
 let InterpretersService = class InterpretersService {
     interpreterModel;
     constructor(interpreterModel) {
@@ -31,13 +32,53 @@ let InterpretersService = class InterpretersService {
         }
         const interpreter = await this.interpreterModel.findOne({ _id: id });
         if (!interpreter) {
-            throw new common_1.NotFoundException('Interpreter not found');
+            throw new common_1.NotFoundException('Interpreter object not found');
         }
         return interpreter;
     }
-    async createInterpreter(createInterpreterDto) {
-        const newInterpreter = new this.interpreterModel(createInterpreterDto);
-        return newInterpreter.save();
+    async createInterpreter(createInterpreter) {
+        const newInterpreter = {
+            ...createInterpreter,
+            interpreter_id: (0, crypto_1.randomUUID)(),
+            calls: [],
+            badges: [],
+        };
+        return this.interpreterModel.create(newInterpreter);
+    }
+    async updateInterpreter(id, updateInterpreter) {
+        delete updateInterpreter.interpreter_id;
+        delete updateInterpreter.date_joined;
+        return this.interpreterModel.findByIdAndUpdate(id, { $set: updateInterpreter }, { new: true, runValidators: true });
+    }
+    async deleteInterpreter(id) {
+        const deleted = await this.interpreterModel.findByIdAndDelete(id);
+        if (!deleted) {
+            throw new common_1.NotFoundException(`Interpreter document with object id: ${id} not found`);
+        }
+        return deleted;
+    }
+    async addCall(id, callDto) {
+        const call = {
+            ...callDto,
+            call_date: new Date(),
+            call_id: (0, crypto_1.randomUUID)(),
+        };
+        const updatedCallField = this.interpreterModel.findByIdAndUpdate(id, { $push: { calls: call } }, { new: true, runValidators: true });
+        if (!updatedCallField) {
+            throw new common_1.NotFoundException(`Interpreter document with id ${id} not found`);
+        }
+        return updatedCallField;
+    }
+    async addBadge(id, badgeDto) {
+        const badge = {
+            ...badgeDto,
+            date_attained: new Date(),
+        };
+        const updatedBadgeField = this.interpreterModel.findByIdAndUpdate(id, { $push: { badges: badge } }, { new: true, runValidators: true });
+        if (!updatedBadgeField) {
+            throw new common_1.NotFoundException(`Interpreter document with id ${id} not found`);
+        }
+        return updatedBadgeField;
     }
 };
 exports.InterpretersService = InterpretersService;
