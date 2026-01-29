@@ -40,6 +40,7 @@ let InterpretersService = class InterpretersService {
         const newInterpreter = {
             ...createInterpreter,
             interpreter_id: (0, crypto_1.randomUUID)(),
+            date_joined: new Date(),
             calls: [],
             badges: [],
         };

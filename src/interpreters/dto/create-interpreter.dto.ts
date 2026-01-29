@@ -117,6 +117,7 @@ export class CreateInterpreterDto {
   @Type(() => LanguageDto)
   languages: LanguageDto[];
 
+  @IsOptional()
   @IsDateString()
   date_joined: string;
 

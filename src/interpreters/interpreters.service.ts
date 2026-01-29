@@ -47,6 +47,7 @@ export class InterpretersService {
     const newInterpreter = {
       ...createInterpreter,
       interpreter_id: randomUUID(),
+      date_joined: new Date(),
       calls: [],
       badges: [],
     };
