@@ -69,9 +69,8 @@ export class CallDto {
   @IsNumber()
   rate_per_min: number;
 
-  @IsOptional()
   @IsNumber()
-  pay?: number; 
+  pay: number; 
 
   @IsString()
   status: string;
@@ -79,8 +78,8 @@ export class CallDto {
   @IsBoolean()
   billable: boolean;
 
-  @IsString()
-  dropped: string;
+  @IsBoolean()
+  dropped: boolean;
 
   @IsOptional()
   @IsString()

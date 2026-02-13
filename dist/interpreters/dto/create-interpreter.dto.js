@@ -116,7 +116,6 @@ __decorate([
     __metadata("design:type", Number)
 ], CallDto.prototype, "rate_per_min", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CallDto.prototype, "pay", void 0);
@@ -129,8 +128,8 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CallDto.prototype, "billable", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
 ], CallDto.prototype, "dropped", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),

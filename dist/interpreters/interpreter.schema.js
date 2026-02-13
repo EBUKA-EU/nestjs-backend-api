@@ -102,12 +102,13 @@ let Call = class Call {
     dropped;
     interpreter_comments;
     client_feedback;
-    call_rating;
+    call_rating_by_client;
+    pay;
     service_type;
 };
 exports.Call = Call;
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Call.prototype, "call_id", void 0);
 __decorate([
@@ -115,32 +116,32 @@ __decorate([
     __metadata("design:type", Date)
 ], Call.prototype, "call_date", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Call.prototype, "client_id", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Call.prototype, "start_time", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
 ], Call.prototype, "mins", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Number)
 ], Call.prototype, "rate_per_min", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Call.prototype, "status", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", Boolean)
 ], Call.prototype, "billable", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Boolean)
 ], Call.prototype, "dropped", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
@@ -153,9 +154,13 @@ __decorate([
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Number)
-], Call.prototype, "call_rating", void 0);
+], Call.prototype, "call_rating_by_client", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Number)
+], Call.prototype, "pay", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Call.prototype, "service_type", void 0);
 exports.Call = Call = __decorate([
@@ -165,6 +170,7 @@ exports.CallSchema = mongoose_1.SchemaFactory.createForClass(Call);
 let Interpreter = class Interpreter extends mongoose_2.Document {
     interpreter_id;
     name;
+    email;
     is_active;
     languages;
     date_joined;
@@ -183,6 +189,10 @@ __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)
 ], Interpreter.prototype, "name", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Interpreter.prototype, "email", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", Boolean)

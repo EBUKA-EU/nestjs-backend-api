@@ -23,10 +23,10 @@ export declare class CallDto {
     start_time: string;
     mins: number;
     rate_per_min: number;
-    pay?: number;
+    pay: number;
     status: string;
     billable: boolean;
-    dropped: string;
+    dropped: boolean;
     interpreter_comments?: string;
     client_feedback?: string;
     call_rating_by_client?: number;

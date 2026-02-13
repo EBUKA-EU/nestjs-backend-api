@@ -196,10 +196,11 @@ export declare class Call {
     rate_per_min: number;
     status: string;
     billable: boolean;
-    dropped: string;
+    dropped: boolean;
     interpreter_comments: string;
     client_feedback: string;
-    call_rating: number;
+    call_rating_by_client: number;
+    pay: number;
     service_type: string;
 }
 export declare const CallSchema: import("mongoose").Schema<Call, import("mongoose").Model<Call, any, any, any, (Document<unknown, any, Call, any, import("mongoose").DefaultSchemaOptions> & Call & {
@@ -293,7 +294,7 @@ export declare const CallSchema: import("mongoose").Schema<Call, import("mongoos
     }, "id"> & {
         id: string;
     }> | undefined;
-    dropped?: import("mongoose").SchemaDefinitionProperty<string, Call, Document<unknown, {}, Call, {
+    dropped?: import("mongoose").SchemaDefinitionProperty<boolean, Call, Document<unknown, {}, Call, {
         id: string;
     }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<Call & {
         _id: import("mongoose").Types.ObjectId;
@@ -320,7 +321,16 @@ export declare const CallSchema: import("mongoose").Schema<Call, import("mongoos
     }, "id"> & {
         id: string;
     }> | undefined;
-    call_rating?: import("mongoose").SchemaDefinitionProperty<number, Call, Document<unknown, {}, Call, {
+    call_rating_by_client?: import("mongoose").SchemaDefinitionProperty<number, Call, Document<unknown, {}, Call, {
+        id: string;
+    }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<Call & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v: number;
+    }, "id"> & {
+        id: string;
+    }> | undefined;
+    pay?: import("mongoose").SchemaDefinitionProperty<number, Call, Document<unknown, {}, Call, {
         id: string;
     }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<Call & {
         _id: import("mongoose").Types.ObjectId;
@@ -342,6 +352,7 @@ export declare const CallSchema: import("mongoose").Schema<Call, import("mongoos
 export declare class Interpreter extends Document {
     interpreter_id: string;
     name: string;
+    email: string;
     is_active: boolean;
     languages: Language[];
     date_joined: Date;
@@ -388,6 +399,15 @@ export declare const InterpreterSchema: import("mongoose").Schema<Interpreter, i
     }, "id"> & {
         id: string;
     }> | undefined;
+    interpreter_id?: import("mongoose").SchemaDefinitionProperty<string, Interpreter, Document<unknown, {}, Interpreter, {
+        id: string;
+    }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<Interpreter & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }> & {
+        __v: number;
+    }, "id"> & {
+        id: string;
+    }> | undefined;
     name?: import("mongoose").SchemaDefinitionProperty<string, Interpreter, Document<unknown, {}, Interpreter, {
         id: string;
     }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<Interpreter & Required<{
@@ -397,7 +417,7 @@ export declare const InterpreterSchema: import("mongoose").Schema<Interpreter, i
     }, "id"> & {
         id: string;
     }> | undefined;
-    interpreter_id?: import("mongoose").SchemaDefinitionProperty<string, Interpreter, Document<unknown, {}, Interpreter, {
+    email?: import("mongoose").SchemaDefinitionProperty<string, Interpreter, Document<unknown, {}, Interpreter, {
         id: string;
     }, import("mongoose").ResolveSchemaOptions<import("mongoose").DefaultSchemaOptions>> & Omit<Interpreter & Required<{
         _id: import("mongoose").Types.ObjectId;

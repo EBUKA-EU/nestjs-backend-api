@@ -35,19 +35,20 @@ export const PerformanceSchema = SchemaFactory.createForClass(Performance);
 
 @Schema({_id: false})
 export class Call {
-  @Prop() call_id: string;
+  @Prop({required: true}) call_id: string;
   @Prop({default: Date.now}) call_date: Date;
-  @Prop() client_id: string;
-  @Prop() start_time: string;
-  @Prop() mins: number;
-  @Prop() rate_per_min: number;
-  @Prop() status: string;
-  @Prop() billable: boolean;
-  @Prop() dropped: string;
+  @Prop({required: true}) client_id: string;
+  @Prop({required: true}) start_time: string;
+  @Prop({required: true}) mins: number;
+  @Prop({required: true}) rate_per_min: number;
+  @Prop({required: true}) status: string;
+  @Prop({required: true}) billable: boolean;
+  @Prop({required: true}) dropped: boolean;
   @Prop() interpreter_comments: string;
   @Prop() client_feedback: string;
-  @Prop() call_rating: number;
-  @Prop() service_type: string;
+  @Prop() call_rating_by_client: number;
+  @Prop({required: true}) pay: number;
+  @Prop({required: true}) service_type: string;
 }
 
 export const CallSchema = SchemaFactory.createForClass(Call);
@@ -56,6 +57,7 @@ export const CallSchema = SchemaFactory.createForClass(Call);
 export class Interpreter extends Document {
   @Prop() interpreter_id: string;
   @Prop() name: string;
+  @Prop() email: string;
   @Prop() is_active: boolean;
 
   @Prop({ type: [LanguageSchema] })
