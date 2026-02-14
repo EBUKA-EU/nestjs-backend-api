@@ -40,13 +40,13 @@ export declare class InterpretersService {
     } & {
         id: string;
     }>;
-    addCall(id: string, callDto: CallDto): Promise<(import("mongoose").Document<unknown, {}, Interpreter, {}, import("mongoose").DefaultSchemaOptions> & Interpreter & Required<{
+    addCall(id: string, callDto: CallDto): Promise<import("mongoose").Document<unknown, {}, Interpreter, {}, import("mongoose").DefaultSchemaOptions> & Interpreter & Required<{
         _id: import("mongoose").Types.ObjectId;
     }> & {
         __v: number;
     } & {
         id: string;
-    }) | null>;
+    }>;
     addBadge(id: string, badgeDto: BadgeDto): Promise<(import("mongoose").Document<unknown, {}, Interpreter, {}, import("mongoose").DefaultSchemaOptions> & Interpreter & Required<{
         _id: import("mongoose").Types.ObjectId;
     }> & {

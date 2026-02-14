@@ -41,13 +41,13 @@ export declare class InterpretersController {
         id: string;
     }>;
     getCalls(id: string): Promise<import("./interpreter.schema").Call[]>;
-    createCall(id: string, addCallDto: CallDto): Promise<(import("mongoose").Document<unknown, {}, Interpreter, {}, import("mongoose").DefaultSchemaOptions> & Interpreter & Required<{
+    createCall(id: string, addCallDto: CallDto): Promise<import("mongoose").Document<unknown, {}, Interpreter, {}, import("mongoose").DefaultSchemaOptions> & Interpreter & Required<{
         _id: import("mongoose").Types.ObjectId;
     }> & {
         __v: number;
     } & {
         id: string;
-    }) | null>;
+    }>;
     getBadges(id: string): Promise<import("./interpreter.schema").Badge[]>;
     createBadge(id: string, addBadgeDto: BadgeDto): Promise<(import("mongoose").Document<unknown, {}, Interpreter, {}, import("mongoose").DefaultSchemaOptions> & Interpreter & Required<{
         _id: import("mongoose").Types.ObjectId;

@@ -124,12 +124,12 @@ __decorate([
     __metadata("design:type", String)
 ], CallDto.prototype, "status", void 0);
 __decorate([
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
 ], CallDto.prototype, "billable", void 0);
 __decorate([
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
 ], CallDto.prototype, "dropped", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
@@ -152,12 +152,14 @@ __decorate([
 ], CallDto.prototype, "service_type", void 0);
 class CreateInterpreterDto {
     interpreter_id;
-    name;
+    first_name;
+    last_name;
+    email;
     is_active;
-    languages;
     date_joined;
     address;
     type;
+    languages;
     badges;
     performance;
     calls;
@@ -171,17 +173,20 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateInterpreterDto.prototype, "name", void 0);
+], CreateInterpreterDto.prototype, "first_name", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateInterpreterDto.prototype, "last_name", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], CreateInterpreterDto.prototype, "email", void 0);
 __decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateInterpreterDto.prototype, "is_active", void 0);
-__decorate([
-    (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.ValidateNested)({ each: true }),
-    (0, class_transformer_1.Type)(() => LanguageDto),
-    __metadata("design:type", Array)
-], CreateInterpreterDto.prototype, "languages", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
@@ -197,7 +202,12 @@ __decorate([
     __metadata("design:type", String)
 ], CreateInterpreterDto.prototype, "type", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => LanguageDto),
+    __metadata("design:type", Array)
+], CreateInterpreterDto.prototype, "languages", void 0);
+__decorate([
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.ValidateNested)({ each: true }),
     (0, class_transformer_1.Type)(() => BadgeDto),

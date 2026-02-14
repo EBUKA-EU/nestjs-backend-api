@@ -34,6 +34,9 @@ let InterpretersService = class InterpretersService {
         if (!interpreter) {
             throw new common_1.NotFoundException('Interpreter object not found');
         }
+        interpreter.calls.sort((a, b) => {
+            return new Date(b.call_date).getTime() - new Date(a.call_date).getTime();
+        });
         return interpreter;
     }
     async createInterpreter(createInterpreter) {
@@ -61,10 +64,10 @@ let InterpretersService = class InterpretersService {
     async addCall(id, callDto) {
         const call = {
             ...callDto,
-            call_date: new Date(),
             call_id: (0, crypto_1.randomUUID)(),
+            call_date: callDto.call_date ? new Date(callDto.call_date) : new Date(),
         };
-        const updatedCallField = this.interpreterModel.findByIdAndUpdate(id, { $push: { calls: call } }, { new: true, runValidators: true });
+        const updatedCallField = await this.interpreterModel.findByIdAndUpdate(id, { $push: { calls: call } }, { new: true, runValidators: true });
         if (!updatedCallField) {
             throw new common_1.NotFoundException(`Interpreter document with id ${id} not found`);
         }

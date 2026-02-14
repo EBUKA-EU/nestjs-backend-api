@@ -20,7 +20,7 @@ export const AddressSchema = SchemaFactory.createForClass(Address);
 @Schema({_id: false})
 export class Badge {
   @Prop() badge_name: string;
-  @Prop() date_attained: string;
+  @Prop() date_attained: Date;
 }
 
 export const BadgeSchema = SchemaFactory.createForClass(Badge);
@@ -42,8 +42,8 @@ export class Call {
   @Prop({required: true}) mins: number;
   @Prop({required: true}) rate_per_min: number;
   @Prop({required: true}) status: string;
-  @Prop({required: true}) billable: boolean;
-  @Prop({required: true}) dropped: boolean;
+  @Prop({required: true}) billable: string;
+  @Prop({required: true}) dropped: string;
   @Prop() interpreter_comments: string;
   @Prop() client_feedback: string;
   @Prop() call_rating_by_client: number;
@@ -56,8 +56,9 @@ export const CallSchema = SchemaFactory.createForClass(Call);
 @Schema()
 export class Interpreter extends Document {
   @Prop() interpreter_id: string;
-  @Prop() name: string;
-  @Prop() email: string;
+  @Prop({required: true}) first_name: string;
+  @Prop({required: true}) last_name: string;
+  @Prop({required: true, unique: true}) email: string;
   @Prop() is_active: boolean;
 
   @Prop({ type: [LanguageSchema] })
@@ -68,7 +69,7 @@ export class Interpreter extends Document {
   @Prop({ type: AddressSchema })
   address: Address;
 
-  @Prop() type: string;
+  @Prop({required: true}) type: string;
 
   @Prop({ type: [BadgeSchema] })
   badges: Badge[];
@@ -81,3 +82,35 @@ export class Interpreter extends Document {
 }
 
 export const InterpreterSchema = SchemaFactory.createForClass(Interpreter);
+
+InterpreterSchema.set('toJSON', {
+  transform: (_: any, ret: any) => {
+    const format = (d: Date) =>
+      `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+
+    // Format date_joined
+    if (ret.date_joined instanceof Date) {
+      ret.date_joined = format(ret.date_joined);
+    }
+
+    // Format calls
+    if (Array.isArray(ret.calls)) {
+      ret.calls = ret.calls.map((call: any) => ({
+        ...call,
+        call_date:
+          call.call_date instanceof Date ? format(call.call_date) : call.call_date,
+      }));
+    }
+
+    // Format badges
+    if (Array.isArray(ret.badges)) {
+      ret.badges = ret.badges.map((badge: any) => ({
+        ...badge,
+        date_attained:
+          badge.date_attained instanceof Date ? format(badge.date_attained) : badge.date_attained,
+      }));
+    }
+
+    return ret;
+  },
+});

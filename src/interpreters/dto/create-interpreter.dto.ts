@@ -6,6 +6,8 @@ import {
   ValidateNested,
   IsNumber,
   IsOptional,
+  isString,
+  IsEmail,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -75,11 +77,11 @@ export class CallDto {
   @IsString()
   status: string;
 
-  @IsBoolean()
-  billable: boolean;
+  @IsString()
+  billable: string;
 
-  @IsBoolean()
-  dropped: boolean;
+  @IsString()
+  dropped: string;
 
   @IsOptional()
   @IsString()
@@ -98,23 +100,23 @@ export class CallDto {
 }
 
 
-
-
 export class CreateInterpreterDto {
   @IsOptional()
   @IsString()
   interpreter_id?: string;
 
   @IsString()
-  name: string;
+  first_name: string;
 
+  @IsString()
+  last_name: string;
+
+  @IsString()
+  @IsEmail()
+  email: string;
+  
   @IsBoolean()
   is_active: boolean;
-
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => LanguageDto)
-  languages: LanguageDto[];
 
   @IsOptional()
   @IsDateString()
@@ -127,7 +129,11 @@ export class CreateInterpreterDto {
   @IsString()
   type: string;
 
-  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => LanguageDto)
+  languages: LanguageDto[];
+
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => BadgeDto)
@@ -137,7 +143,6 @@ export class CreateInterpreterDto {
   @Type(() => PerformanceDto)
   performance: PerformanceDto;
 
-  
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CallDto)

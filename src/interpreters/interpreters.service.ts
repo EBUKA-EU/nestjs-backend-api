@@ -39,6 +39,12 @@ export class InterpretersService {
       throw new NotFoundException('Interpreter object not found');
     }
 
+    // Sort calls by newest first
+    interpreter.calls.sort((a, b) => {
+      return new Date(b.call_date).getTime() - new Date(a.call_date).getTime();
+    });
+
+
     return interpreter;
   }
 
@@ -85,11 +91,11 @@ export class InterpretersService {
   async addCall(id: string, callDto: CallDto) {
     const call = {
       ...callDto,
-      call_date: new Date(),
       call_id: randomUUID(),
+      call_date: callDto.call_date ? new Date(callDto.call_date) : new Date(),
     };
 
-    const updatedCallField = this.interpreterModel.findByIdAndUpdate(
+    const updatedCallField = await this.interpreterModel.findByIdAndUpdate(
       id,
       { $push: { calls: call } },
       { new: true, runValidators: true },

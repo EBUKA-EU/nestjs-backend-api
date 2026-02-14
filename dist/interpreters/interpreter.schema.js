@@ -67,7 +67,7 @@ __decorate([
 ], Badge.prototype, "badge_name", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Date)
 ], Badge.prototype, "date_attained", void 0);
 exports.Badge = Badge = __decorate([
     (0, mongoose_1.Schema)({ _id: false })
@@ -137,11 +137,11 @@ __decorate([
 ], Call.prototype, "status", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", Boolean)
+    __metadata("design:type", String)
 ], Call.prototype, "billable", void 0);
 __decorate([
     (0, mongoose_1.Prop)({ required: true }),
-    __metadata("design:type", Boolean)
+    __metadata("design:type", String)
 ], Call.prototype, "dropped", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
@@ -169,7 +169,8 @@ exports.Call = Call = __decorate([
 exports.CallSchema = mongoose_1.SchemaFactory.createForClass(Call);
 let Interpreter = class Interpreter extends mongoose_2.Document {
     interpreter_id;
-    name;
+    first_name;
+    last_name;
     email;
     is_active;
     languages;
@@ -186,11 +187,15 @@ __decorate([
     __metadata("design:type", String)
 ], Interpreter.prototype, "interpreter_id", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
-], Interpreter.prototype, "name", void 0);
+], Interpreter.prototype, "first_name", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", String)
+], Interpreter.prototype, "last_name", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true, unique: true }),
     __metadata("design:type", String)
 ], Interpreter.prototype, "email", void 0);
 __decorate([
@@ -210,7 +215,7 @@ __decorate([
     __metadata("design:type", Address)
 ], Interpreter.prototype, "address", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ required: true }),
     __metadata("design:type", String)
 ], Interpreter.prototype, "type", void 0);
 __decorate([
@@ -229,4 +234,25 @@ exports.Interpreter = Interpreter = __decorate([
     (0, mongoose_1.Schema)()
 ], Interpreter);
 exports.InterpreterSchema = mongoose_1.SchemaFactory.createForClass(Interpreter);
+exports.InterpreterSchema.set('toJSON', {
+    transform: (_, ret) => {
+        const format = (d) => `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+        if (ret.date_joined instanceof Date) {
+            ret.date_joined = format(ret.date_joined);
+        }
+        if (Array.isArray(ret.calls)) {
+            ret.calls = ret.calls.map((call) => ({
+                ...call,
+                call_date: call.call_date instanceof Date ? format(call.call_date) : call.call_date,
+            }));
+        }
+        if (Array.isArray(ret.badges)) {
+            ret.badges = ret.badges.map((badge) => ({
+                ...badge,
+                date_attained: badge.date_attained instanceof Date ? format(badge.date_attained) : badge.date_attained,
+            }));
+        }
+        return ret;
+    },
+});
 //# sourceMappingURL=interpreter.schema.js.map

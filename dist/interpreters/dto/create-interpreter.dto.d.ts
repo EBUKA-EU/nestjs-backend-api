@@ -25,8 +25,8 @@ export declare class CallDto {
     rate_per_min: number;
     pay: number;
     status: string;
-    billable: boolean;
-    dropped: boolean;
+    billable: string;
+    dropped: string;
     interpreter_comments?: string;
     client_feedback?: string;
     call_rating_by_client?: number;
@@ -34,12 +34,14 @@ export declare class CallDto {
 }
 export declare class CreateInterpreterDto {
     interpreter_id?: string;
-    name: string;
+    first_name: string;
+    last_name: string;
+    email: string;
     is_active: boolean;
-    languages: LanguageDto[];
     date_joined: string;
     address: AddressDto;
     type: string;
+    languages: LanguageDto[];
     badges: BadgeDto[];
     performance: PerformanceDto;
     calls: CallDto[];
