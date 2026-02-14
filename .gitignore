@@ -25,3 +25,6 @@ webpack/
 # IDE
 .vscode/
 .idea/
+
+# Extensions
+.prettierrc
