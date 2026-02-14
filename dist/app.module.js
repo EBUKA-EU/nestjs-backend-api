@@ -12,13 +12,28 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const interpreters_module_1 = require("./interpreters/interpreters.module");
+const config_1 = require("@nestjs/config");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot('mongodb+srv://ugwuchukwuebuka999_db_user:120896%40UEEServices@cluster0.8ijjebb.mongodb.net/language_localization'),
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+            }),
+            mongoose_1.MongooseModule.forRootAsync({
+                inject: [config_1.ConfigService],
+                useFactory: (config) => {
+                    const uri = config.get('DATABASE_URL');
+                    if (!uri) {
+                        throw new Error("DATABASE_URL is not defined in environment variables");
+                    }
+                    return { uri };
+                },
+            }),
+            auth_module_1.AuthModule,
             interpreters_module_1.InterpretersModule,
         ],
         controllers: [app_controller_1.AppController],

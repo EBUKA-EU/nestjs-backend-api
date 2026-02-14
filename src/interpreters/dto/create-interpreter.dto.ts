@@ -134,6 +134,7 @@ export class CreateInterpreterDto {
   @Type(() => LanguageDto)
   languages: LanguageDto[];
 
+  @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => BadgeDto)
@@ -143,6 +144,7 @@ export class CreateInterpreterDto {
   @Type(() => PerformanceDto)
   performance: PerformanceDto;
 
+  @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CallDto)

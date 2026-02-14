@@ -6,20 +6,20 @@ import {
   HttpCode,
   HttpStatus,
   Param,
-  ParseUUIDPipe,
   Patch,
   Post,
 } from '@nestjs/common';
 import { InterpretersService } from './interpreters.service';
 import { ParseObjectIdPipe } from '@nestjs/mongoose';
-import { Interpreter } from './interpreter.schema';
 import {
   BadgeDto,
   CallDto,
   CreateInterpreterDto,
 } from './dto/create-interpreter.dto';
 import { UpdateInterpreterDto } from './dto/update-interpreter.dto';
-import type { UUID } from 'crypto';
+
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('interpreters')
 export class InterpretersController {
@@ -45,6 +45,7 @@ export class InterpretersController {
 
   // Create interpreter document
   // POST /interpreters
+  @UseGuards(JwtAuthGuard)
   @Post()
   @HttpCode(HttpStatus.CREATED)
   create(@Body() createInterpreterDto: CreateInterpreterDto) {
@@ -53,6 +54,7 @@ export class InterpretersController {
 
   // Update an interpreter document
   // PATCH /interpreters/:id
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   updateOne(
     @Param('id', ParseObjectIdPipe) id: string,
@@ -63,6 +65,7 @@ export class InterpretersController {
 
   // Delete an interpreter document
   // DELETE /profiles/:id
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   deleteOne(@Param('id', ParseObjectIdPipe) id: string) {
@@ -80,6 +83,7 @@ export class InterpretersController {
 
   // Create call for a particular interpreter
   // POST /interpreter/:id/calls
+  @UseGuards(JwtAuthGuard)
   @Post(':id/calls')
   createCall(
     @Param('id', ParseObjectIdPipe) id: string,
@@ -98,6 +102,7 @@ export class InterpretersController {
 
   // Add a badge to the badge field of an interpreter document
   // POST /interpreters/:id/badges
+  @UseGuards(JwtAuthGuard)
   @Post(':id/badges')
   createBadge(
     @Param('id', ParseObjectIdPipe) id: string,

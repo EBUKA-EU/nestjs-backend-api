@@ -18,6 +18,8 @@ const interpreters_service_1 = require("./interpreters.service");
 const mongoose_1 = require("@nestjs/mongoose");
 const create_interpreter_dto_1 = require("./dto/create-interpreter.dto");
 const update_interpreter_dto_1 = require("./dto/update-interpreter.dto");
+const common_2 = require("@nestjs/common");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 let InterpretersController = class InterpretersController {
     service;
     constructor(service) {
@@ -69,6 +71,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], InterpretersController.prototype, "findOne", null);
 __decorate([
+    (0, common_2.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)(),
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     __param(0, (0, common_1.Body)()),
@@ -77,6 +80,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], InterpretersController.prototype, "create", null);
 __decorate([
+    (0, common_2.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id', mongoose_1.ParseObjectIdPipe)),
     __param(1, (0, common_1.Body)()),
@@ -85,6 +89,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], InterpretersController.prototype, "updateOne", null);
 __decorate([
+    (0, common_2.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Delete)(':id'),
     (0, common_1.HttpCode)(common_1.HttpStatus.NO_CONTENT),
     __param(0, (0, common_1.Param)('id', mongoose_1.ParseObjectIdPipe)),
@@ -100,6 +105,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], InterpretersController.prototype, "getCalls", null);
 __decorate([
+    (0, common_2.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)(':id/calls'),
     __param(0, (0, common_1.Param)('id', mongoose_1.ParseObjectIdPipe)),
     __param(1, (0, common_1.Body)()),
@@ -115,6 +121,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], InterpretersController.prototype, "getBadges", null);
 __decorate([
+    (0, common_2.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)(':id/badges'),
     __param(0, (0, common_1.Param)('id', mongoose_1.ParseObjectIdPipe)),
     __param(1, (0, common_1.Body)()),
