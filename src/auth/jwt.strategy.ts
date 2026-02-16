@@ -4,6 +4,12 @@ import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { ConfigService } from "@nestjs/config";
 
+
+interface JwtPayload {
+  sub: string;
+  email: string
+}
+
 /**
  * JwtStrategy implements Passport's JWT authentication strategy
  * Extracts JWT tokens from the Authorization header and validates them
@@ -37,10 +43,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    * Validate method is called after JWT has been successfully verified
    * Extracts user information from the JWT payload
    * 
-   * @param {any} payload - The decoded JWT payload containing user info
+   * @param {JwtPayload} payload - The decoded JWT payload containing user info
    * @returns {Object} User object with userId and email to attach to request
    */
-  async validate(payload: any) {
+  async validate(payload: JwtPayload): Promise<object> {
     // Return user object with userId from JWT 'sub' claim and email claim
     return { userId: payload.sub, email: payload.email };
   }

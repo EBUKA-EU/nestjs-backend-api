@@ -249,11 +249,11 @@ InterpreterSchema.set('toJSON', {
   transform: (_: any, ret: any) => {
     /**
      * Helper function to format Date objects to YYYY/MM/DD string format
-     * @param {Date} d - Date to format
+     * @param {Date} date - Date to format
      * @returns {string} Formatted date string
      */
-    const format = (d: Date) =>
-      `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+    const format = (date: Date): string =>
+      `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
 
     // Format the date_joined field if it exists and is a Date
     if (ret.date_joined instanceof Date) {
