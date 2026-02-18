@@ -45,11 +45,15 @@ export class AuthService {
      * Registers a new user account
      * Validates email uniqueness, password strength, hashes password, and generates JWT token
      * 
-     * @param {RegisterDto} dto - Registration data containing email and password
+     * @param {RegisterDto} dto - Registration data containing first name, last name, email and password
      * @returns {Promise<Object>} Object containing success message and JWT token
      * @throws {BadRequestException} If email is already in use or password is weak
      */
-    async register(dto: RegisterDto){
+    async register(dto: RegisterDto): Promise<object>{
+
+        const firstName = dto.firstName;
+        const lastName = dto.lastName;
+
         // Normalize email: convert to lowercase and trim whitespace
         const email = dto.email.toLowerCase().trim();
         
@@ -69,6 +73,8 @@ export class AuthService {
         
         // Create new user document in MongoDB
         const newUser = await this.userModel.create({
+            firstName,
+            lastName,
             email,
             password: hashedPassword,
         });
@@ -90,7 +96,7 @@ export class AuthService {
      * @returns {Promise<Object>} Object containing success message and JWT token
      * @throws {UnauthorizedException} If email not found or password is incorrect
      */
-    async login(dto: LoginDto) {
+    async login(dto: LoginDto): Promise<object> {
         // Normalize email: convert to lowercase and trim whitespace
         const email = dto.email.toLowerCase().trim();
         

@@ -1,5 +1,5 @@
 // Data Transfer Object for user registration request validation
-import {IsEmail, IsString, MinLength} from "class-validator";
+import {IsEmail, IsString, Matches, MaxLength, MinLength} from "class-validator";
 
 /**
  * RegisterDto validates the registration request body
@@ -7,12 +7,16 @@ import {IsEmail, IsString, MinLength} from "class-validator";
  */
 export class RegisterDto {
     @IsString()
-    @MinLength(2, {message: "First name must be at least 2 characters long"})
+    @MinLength(2, {message: "First name is too short"})
+    @MaxLength(55, {message: "First name is too long"})
+    @Matches(/^[a-zA-z ]+$/, {message: "First name cannot contain special characters and numbers"})
     firstName: string;
 
 
     @IsString()
-    @MinLength(2, {message: "Last name must be at least 2 characters long"})
+    @MinLength(2, {message: "Last name is too short"})
+    @MaxLength(55, {message: "Last name is too long"})
+    @Matches(/^[a-zA-z ]+$/, {message: "Last name cannot contain special characters and numbers"})
     lastName: string;
 
     /**

@@ -9,6 +9,13 @@ import { Document } from 'mongoose';
  */
 @Schema({timestamps: true})
 export class User extends Document {
+    @Prop({required: true})
+    firstName: string;
+
+
+    @Prop({required: true})
+    lastName: string;
+
     /** 
      * User email address
      * Must be unique, lowercase, and have whitespace trimmed
