@@ -6,6 +6,15 @@ import {IsEmail, IsString, MinLength} from "class-validator";
  * Contains email and password fields with validation rules
  */
 export class RegisterDto {
+    @IsString()
+    @MinLength(2, {message: "First name must be at least 2 characters long"})
+    firstName: string;
+
+
+    @IsString()
+    @MinLength(2, {message: "Last name must be at least 2 characters long"})
+    lastName: string;
+
     /**
      * User email address
      * Must be a valid email format
