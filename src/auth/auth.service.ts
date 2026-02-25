@@ -85,7 +85,14 @@ export class AuthService {
             email: newUser.email,
         });
 
-        return { message: "User registered successfully", token };
+        return {
+            message: "User registered successfully",
+            token,
+            user: {
+                name: `${newUser.firstName} ${newUser.lastName}`,
+                email: newUser.email
+            }
+        };
     }
 
     /**
@@ -118,6 +125,13 @@ export class AuthService {
             email: user.email,
         });
         
-        return { message: "Login successful", token };
+        return {
+            message: "Login successful",
+            token,
+            user: {
+                name: `${user.firstName} ${user.lastName}`,
+                email: user.email,
+            }
+        };
     }
 }
