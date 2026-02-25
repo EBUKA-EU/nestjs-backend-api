@@ -10,6 +10,17 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   // Create the NestJS application instance with the root AppModule
   const app = await NestFactory.create(AppModule);
+
+  // ✅ ENABLE CORS
+  app.enableCors({
+    origin: [
+      "http://localhost:5173",  // Vite dev server
+      "http://127.0.0.1:5173"
+    ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type, Authorization",
+    credentials: true,
+  });
   
   // Configure global validation pipes for all incoming requests
   app.useGlobalPipes(
