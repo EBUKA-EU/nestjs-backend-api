@@ -89,17 +89,14 @@ export class AuthService {
     });
 
     return {
-           
       message: 'User registered successfully',
-     
-            token,
+      token,
       role: newUser.role,
-   ,
-            user: {
-                name: `${newUser.firstName} ${newUser.lastName}`,
-                email: newUser.email
-            }
-        };
+      user: {
+        name: `${newUser.firstName} ${newUser.lastName}`,
+        email: newUser.email,
+      },
+    };
   }
 
   /**
@@ -134,13 +131,14 @@ export class AuthService {
     });
 
     return {
-            message: 'Login successful',
-            token, role: user.role,
-            user: {
-                name: `${user.firstName} ${user.lastName}`,
-                email: user.email,
-            }
-        };
+      message: 'Login successful',
+      token,
+      role: user.role,
+      user: {
+        name: `${user.firstName} ${user.lastName}`,
+        email: user.email,
+      },
+    };
   }
 
   /**
@@ -153,4 +151,3 @@ export class AuthService {
     return this.userModel.find().select('-password').exec();
   }
 }
-
