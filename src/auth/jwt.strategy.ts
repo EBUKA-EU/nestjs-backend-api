@@ -1,13 +1,13 @@
 // JWT strategy for Passport authentication - validates JWT tokens from requests
-import { Injectable } from "@nestjs/common";
-import { PassportStrategy } from "@nestjs/passport";
-import { ExtractJwt, Strategy } from "passport-jwt";
-import { ConfigService } from "@nestjs/config";
-
+import { Injectable } from '@nestjs/common';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { ConfigService } from '@nestjs/config';
 
 interface JwtPayload {
   sub: string;
-  email: string
+  email: string;
+  role: string;
 }
 
 /**
@@ -23,9 +23,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
    */
   constructor(configService: ConfigService) {
     // Retrieve JWT secret from environment variables
-    const secret = configService.get<string>("JWT_SECRET");
+    const secret = configService.get<string>('JWT_SECRET');
     if (!secret) {
-      throw new Error("JWT_SECRET is not defined");
+      throw new Error('JWT_SECRET is not defined');
     }
 
     // Call parent constructor with Passport JWT configuration
@@ -42,12 +42,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   /**
    * Validate method is called after JWT has been successfully verified
    * Extracts user information from the JWT payload
-   * 
+   *
    * @param {JwtPayload} payload - The decoded JWT payload containing user info
    * @returns {Object} User object with userId and email to attach to request
    */
   async validate(payload: JwtPayload): Promise<object> {
-    // Return user object with userId from JWT 'sub' claim and email claim
-    return { userId: payload.sub, email: payload.email };
+    // Return user object attached to request.user — includes role for RolesGuard
+    return { userId: payload.sub, email: payload.email, role: payload.role };
   }
 }

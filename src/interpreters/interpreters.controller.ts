@@ -21,6 +21,9 @@ import { UpdateInterpreterDto } from './dto/update-interpreter.dto';
 
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../auth/roles.decorator';
+import { Role } from '../auth/roles.enum';
 
 /**
  * InterpretersController handles all HTTP requests related to interpreters
@@ -82,7 +85,8 @@ export class InterpretersController {
    * @param {UpdateInterpreterDto} updateInterpreter - Validated partial interpreter data (all fields optional)
    * @returns {Object} Updated interpreter document
    */
-  @UseGuards(JwtAuthGuard)
+  @Roles(Role.Admin)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Patch(':id')
   updateOne(
     @Param('id', ParseObjectIdPipe) id: string,
@@ -99,7 +103,8 @@ export class InterpretersController {
    * @param {string} id - MongoDB ObjectId of the interpreter to delete
    * @returns {void} No content returned on successful deletion
    */
-  @UseGuards(JwtAuthGuard)
+  @Roles(Role.Admin)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   deleteOne(@Param('id', ParseObjectIdPipe) id: string) {
