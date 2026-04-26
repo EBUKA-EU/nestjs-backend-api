@@ -12,9 +12,12 @@
  */
 
 import * as dotenv from 'dotenv';
+import * as path from 'path';
 import mongoose from 'mongoose';
 
-dotenv.config();
+// Load .env.local first (takes priority), then fall back to .env
+dotenv.config({ path: path.resolve(process.cwd(), '.env.local') });
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 async function migrate() {
   const uri = process.env.DATABASE_URL;

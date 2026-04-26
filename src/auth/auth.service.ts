@@ -128,4 +128,14 @@ export class AuthService {
 
     return { message: 'Login successful', token, role: user.role };
   }
+
+  /**
+   * Retrieves all users from the database
+   * Excludes password field from returned documents for security
+   *
+   * @returns {Promise<User[]>} Array of user documents without passwords
+   */
+  async findAllUsers(): Promise<User[]> {
+    return this.userModel.find().select('-password').exec();
+  }
 }
